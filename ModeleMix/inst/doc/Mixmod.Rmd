@@ -1,0 +1,35 @@
+---
+title: "Mixmod"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mixmod}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "exemple d'application"
+)
+```
+
+```{r fit}
+library(ModeleMix)
+library(Rmixmod)
+data("heterodata")
+fit <- ModeleMix::modelMixte(heterodata,3)
+print(fit)
+```
+```{r plotcluster}
+ModeleMix::plot_cluster(heterodata,fit$cluster)
+```
+```{r plotbic}
+ModeleMix::plot_BIC(heterodata,4)
+```
+```{r plotcluster2}
+data("iris")
+fit <- ModeleMix::modelMixte(iris,3)
+ModeleMix::plot_cluster(iris,fit$cluster)
+
+```

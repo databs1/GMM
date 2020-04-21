@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>Mixmod</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Mixmod</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(ModeleMix)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(Rmixmod)</a>
+<a class="sourceLine" id="cb1-3" title="3">exemple d<span class="st">&#39;application Loading required package: Rcpp</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="st">exemple d&#39;</span>application Rmixmod v. <span class="dv">2</span>.<span class="dv">1</span>.<span class="fl">2.2</span> <span class="op">/</span><span class="st"> </span>URI<span class="op">:</span><span class="st"> </span>www.mixmod.org</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">data</span>(<span class="st">&quot;heterodata&quot;</span>)</a>
+<a class="sourceLine" id="cb1-6" title="6">fit &lt;-<span class="st"> </span>ModeleMix<span class="op">::</span><span class="kw">modelMixte</span>(heterodata,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="kw">print</span>(fit)</a>
+<a class="sourceLine" id="cb1-8" title="8">exemple d<span class="st">&#39;application $pi</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="st">exemple d&#39;</span>application [<span class="dv">1</span>] <span class="fl">0.2489355</span> <span class="fl">0.2410645</span> <span class="fl">0.5100000</span></a>
+<a class="sourceLine" id="cb1-10" title="10">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha</a>
+<a class="sourceLine" id="cb1-12" title="12">exemple d<span class="st">&#39;application $alpha[[1]]</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb1-14" title="14">exemple d<span class="st">&#39;application V11 V12 </span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="st">exemple d&#39;</span>application   <span class="dv">1</span>   <span class="dv">0</span> </a>
+<a class="sourceLine" id="cb1-16" title="16">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">2</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb1-18" title="18">exemple d<span class="st">&#39;application        V21        V22 </span></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="st">exemple d&#39;</span>application <span class="fl">0.02008553</span> <span class="fl">0.97991447</span> </a>
+<a class="sourceLine" id="cb1-20" title="20">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">3</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb1-22" title="22">exemple d<span class="st">&#39;application       V31       V32 </span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="st">exemple d&#39;</span>application <span class="fl">0.2677312</span> <span class="fl">0.7322688</span> </a>
+<a class="sourceLine" id="cb1-24" title="24">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="st">exemple d&#39;</span>application </a>
+<a class="sourceLine" id="cb1-26" title="26">exemple d<span class="st">&#39;application $alpha[[2]]</span></a>
+<a class="sourceLine" id="cb1-27" title="27"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha[[<span class="dv">2</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb1-28" title="28">exemple d<span class="st">&#39;application V11 V12 </span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="st">exemple d&#39;</span>application   <span class="dv">1</span>   <span class="dv">0</span> </a>
+<a class="sourceLine" id="cb1-30" title="30">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-31" title="31"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha[[<span class="dv">2</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">2</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb1-32" title="32">exemple d<span class="st">&#39;application          V21          V22 </span></a>
+<a class="sourceLine" id="cb1-33" title="33"><span class="st">exemple d&#39;</span>application <span class="fl">5.442778e-32</span> <span class="fl">1.000000e+00</span> </a>
+<a class="sourceLine" id="cb1-34" title="34">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-35" title="35"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha[[<span class="dv">2</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">3</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb1-36" title="36">exemple d<span class="st">&#39;application       V31       V32 </span></a>
+<a class="sourceLine" id="cb1-37" title="37"><span class="st">exemple d&#39;</span>application <span class="fl">0.7813352</span> <span class="fl">0.2186648</span> </a>
+<a class="sourceLine" id="cb1-38" title="38">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-39" title="39"><span class="st">exemple d&#39;</span>application </a>
+<a class="sourceLine" id="cb1-40" title="40">exemple d<span class="st">&#39;application $alpha[[3]]</span></a>
+<a class="sourceLine" id="cb1-41" title="41"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha[[<span class="dv">3</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb1-42" title="42">exemple d<span class="st">&#39;application V11 V12 </span></a>
+<a class="sourceLine" id="cb1-43" title="43"><span class="st">exemple d&#39;</span>application   <span class="dv">0</span>   <span class="dv">1</span> </a>
+<a class="sourceLine" id="cb1-44" title="44">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-45" title="45"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha[[<span class="dv">3</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">2</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb1-46" title="46">exemple d<span class="st">&#39;application       V21       V22 </span></a>
+<a class="sourceLine" id="cb1-47" title="47"><span class="st">exemple d&#39;</span>application <span class="fl">0.1862745</span> <span class="fl">0.8137255</span> </a>
+<a class="sourceLine" id="cb1-48" title="48">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-49" title="49"><span class="st">exemple d&#39;</span>application <span class="op">$</span>alpha[[<span class="dv">3</span>]]<span class="op">$</span><span class="st">`</span><span class="dt">3</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb1-50" title="50">exemple d<span class="st">&#39;application        V31        V32 </span></a>
+<a class="sourceLine" id="cb1-51" title="51"><span class="st">exemple d&#39;</span>application <span class="fl">0.02941176</span> <span class="fl">0.97058824</span> </a>
+<a class="sourceLine" id="cb1-52" title="52">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-53" title="53"><span class="st">exemple d&#39;</span>application </a>
+<a class="sourceLine" id="cb1-54" title="54">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-55" title="55"><span class="st">exemple d&#39;</span>application <span class="op">$</span>tik</a>
+<a class="sourceLine" id="cb1-56" title="56">exemple d<span class="st">&#39;application            [,1]         [,2] [,3]</span></a>
+<a class="sourceLine" id="cb1-57" title="57"><span class="st">exemple d&#39;</span>application <span class="dv">1</span>   <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-58" title="58">exemple d<span class="st">&#39;application 2   0.241517276 7.584827e-01    0</span></a>
+<a class="sourceLine" id="cb1-59" title="59"><span class="st">exemple d&#39;</span>application <span class="dv">3</span>   <span class="fl">0.591605699</span> <span class="fl">4.083943e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-60" title="60">exemple d<span class="st">&#39;application 4   0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-61" title="61"><span class="st">exemple d&#39;</span>application <span class="dv">5</span>   <span class="fl">0.022660505</span> <span class="fl">9.773395e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-62" title="62">exemple d<span class="st">&#39;application 6   0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-63" title="63"><span class="st">exemple d&#39;</span>application <span class="dv">7</span>   <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-64" title="64">exemple d<span class="st">&#39;application 8   0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-65" title="65"><span class="st">exemple d&#39;</span>application <span class="dv">9</span>   <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-66" title="66">exemple d<span class="st">&#39;application 10  0.153867594 8.461324e-01    0</span></a>
+<a class="sourceLine" id="cb1-67" title="67"><span class="st">exemple d&#39;</span>application <span class="dv">11</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-68" title="68">exemple d<span class="st">&#39;application 12  0.502189361 4.978106e-01    0</span></a>
+<a class="sourceLine" id="cb1-69" title="69"><span class="st">exemple d&#39;</span>application <span class="dv">13</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-70" title="70">exemple d<span class="st">&#39;application 14  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-71" title="71"><span class="st">exemple d&#39;</span>application <span class="dv">15</span>  <span class="fl">0.424946325</span> <span class="fl">5.750537e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-72" title="72">exemple d<span class="st">&#39;application 16  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-73" title="73"><span class="st">exemple d&#39;</span>application <span class="dv">17</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-74" title="74">exemple d<span class="st">&#39;application 18  0.590347214 4.096528e-01    0</span></a>
+<a class="sourceLine" id="cb1-75" title="75"><span class="st">exemple d&#39;</span>application <span class="dv">19</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-76" title="76">exemple d<span class="st">&#39;application 20  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-77" title="77"><span class="st">exemple d&#39;</span>application <span class="dv">21</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-78" title="78">exemple d<span class="st">&#39;application 22  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-79" title="79"><span class="st">exemple d&#39;</span>application <span class="dv">23</span>  <span class="fl">0.011757580</span> <span class="fl">9.882424e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-80" title="80">exemple d<span class="st">&#39;application 24  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-81" title="81"><span class="st">exemple d&#39;</span>application <span class="dv">25</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-82" title="82">exemple d<span class="st">&#39;application 26  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-83" title="83"><span class="st">exemple d&#39;</span>application <span class="dv">27</span>  <span class="fl">0.818798005</span> <span class="fl">1.812020e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-84" title="84">exemple d<span class="st">&#39;application 28  0.786345669 2.136543e-01    0</span></a>
+<a class="sourceLine" id="cb1-85" title="85"><span class="st">exemple d&#39;</span>application <span class="dv">29</span>  <span class="fl">0.807947036</span> <span class="fl">1.920530e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-86" title="86">exemple d<span class="st">&#39;application 30  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-87" title="87"><span class="st">exemple d&#39;</span>application <span class="dv">31</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-88" title="88">exemple d<span class="st">&#39;application 32  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-89" title="89"><span class="st">exemple d&#39;</span>application <span class="dv">33</span>  <span class="fl">0.524314375</span> <span class="fl">4.756856e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-90" title="90">exemple d<span class="st">&#39;application 34  0.002082966 9.979170e-01    0</span></a>
+<a class="sourceLine" id="cb1-91" title="91"><span class="st">exemple d&#39;</span>application <span class="dv">35</span>  <span class="fl">0.839745914</span> <span class="fl">1.602541e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-92" title="92">exemple d<span class="st">&#39;application 36  0.546083680 4.539163e-01    0</span></a>
+<a class="sourceLine" id="cb1-93" title="93"><span class="st">exemple d&#39;</span>application <span class="dv">37</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-94" title="94">exemple d<span class="st">&#39;application 38  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-95" title="95"><span class="st">exemple d&#39;</span>application <span class="dv">39</span>  <span class="fl">0.908970949</span> <span class="fl">9.102905e-02</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-96" title="96">exemple d<span class="st">&#39;application 40  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-97" title="97"><span class="st">exemple d&#39;</span>application <span class="dv">41</span>  <span class="fl">0.840336785</span> <span class="fl">1.596632e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-98" title="98">exemple d<span class="st">&#39;application 42  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-99" title="99"><span class="st">exemple d&#39;</span>application <span class="dv">43</span>  <span class="fl">0.013625437</span> <span class="fl">9.863746e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-100" title="100">exemple d<span class="st">&#39;application 44  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-101" title="101"><span class="st">exemple d&#39;</span>application <span class="dv">45</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-102" title="102">exemple d<span class="st">&#39;application 46  0.161072530 8.389275e-01    0</span></a>
+<a class="sourceLine" id="cb1-103" title="103"><span class="st">exemple d&#39;</span>application <span class="dv">47</span>  <span class="fl">0.023384242</span> <span class="fl">9.766158e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-104" title="104">exemple d<span class="st">&#39;application 48  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-105" title="105"><span class="st">exemple d&#39;</span>application <span class="dv">49</span>  <span class="fl">0.762019199</span> <span class="fl">2.379808e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-106" title="106">exemple d<span class="st">&#39;application 50  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-107" title="107"><span class="st">exemple d&#39;</span>application <span class="dv">51</span>  <span class="fl">0.514514857</span> <span class="fl">4.854851e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-108" title="108">exemple d<span class="st">&#39;application 52  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-109" title="109"><span class="st">exemple d&#39;</span>application <span class="dv">53</span>  <span class="fl">0.238276865</span> <span class="fl">7.617231e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-110" title="110">exemple d<span class="st">&#39;application 54  0.921040449 7.895955e-02    0</span></a>
+<a class="sourceLine" id="cb1-111" title="111"><span class="st">exemple d&#39;</span>application <span class="dv">55</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-112" title="112">exemple d<span class="st">&#39;application 56  0.806617141 1.933829e-01    0</span></a>
+<a class="sourceLine" id="cb1-113" title="113"><span class="st">exemple d&#39;</span>application <span class="dv">57</span>  <span class="fl">0.566458848</span> <span class="fl">4.335412e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-114" title="114">exemple d<span class="st">&#39;application 58  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-115" title="115"><span class="st">exemple d&#39;</span>application <span class="dv">59</span>  <span class="fl">0.743253434</span> <span class="fl">2.567466e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-116" title="116">exemple d<span class="st">&#39;application 60  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-117" title="117"><span class="st">exemple d&#39;</span>application <span class="dv">61</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-118" title="118">exemple d<span class="st">&#39;application 62  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-119" title="119"><span class="st">exemple d&#39;</span>application <span class="dv">63</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-120" title="120">exemple d<span class="st">&#39;application 64  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-121" title="121"><span class="st">exemple d&#39;</span>application <span class="dv">65</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-122" title="122">exemple d<span class="st">&#39;application 66  0.397734673 6.022653e-01    0</span></a>
+<a class="sourceLine" id="cb1-123" title="123"><span class="st">exemple d&#39;</span>application <span class="dv">67</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-124" title="124">exemple d<span class="st">&#39;application 68  1.000000000 7.149149e-31    0</span></a>
+<a class="sourceLine" id="cb1-125" title="125"><span class="st">exemple d&#39;</span>application <span class="dv">69</span>  <span class="fl">0.472394087</span> <span class="fl">5.276059e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-126" title="126">exemple d<span class="st">&#39;application 70  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-127" title="127"><span class="st">exemple d&#39;</span>application <span class="dv">71</span>  <span class="fl">0.053399948</span> <span class="fl">9.466001e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-128" title="128">exemple d<span class="st">&#39;application 72  0.918257701 8.174230e-02    0</span></a>
+<a class="sourceLine" id="cb1-129" title="129"><span class="st">exemple d&#39;</span>application <span class="dv">73</span>  <span class="fl">0.383953419</span> <span class="fl">6.160466e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-130" title="130">exemple d<span class="st">&#39;application 74  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-131" title="131"><span class="st">exemple d&#39;</span>application <span class="dv">75</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-132" title="132">exemple d<span class="st">&#39;application 76  0.687736536 3.122635e-01    0</span></a>
+<a class="sourceLine" id="cb1-133" title="133"><span class="st">exemple d&#39;</span>application <span class="dv">77</span>  <span class="fl">0.850441781</span> <span class="fl">1.495582e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-134" title="134">exemple d<span class="st">&#39;application 78  0.006742153 9.932578e-01    0</span></a>
+<a class="sourceLine" id="cb1-135" title="135"><span class="st">exemple d&#39;</span>application <span class="dv">79</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-136" title="136">exemple d<span class="st">&#39;application 80  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-137" title="137"><span class="st">exemple d&#39;</span>application <span class="dv">81</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-138" title="138">exemple d<span class="st">&#39;application 82  0.209274077 7.907259e-01    0</span></a>
+<a class="sourceLine" id="cb1-139" title="139"><span class="st">exemple d&#39;</span>application <span class="dv">83</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-140" title="140">exemple d<span class="st">&#39;application 84  0.908997521 9.100248e-02    0</span></a>
+<a class="sourceLine" id="cb1-141" title="141"><span class="st">exemple d&#39;</span>application <span class="dv">85</span>  <span class="fl">0.673416806</span> <span class="fl">3.265832e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-142" title="142">exemple d<span class="st">&#39;application 86  0.845319965 1.546800e-01    0</span></a>
+<a class="sourceLine" id="cb1-143" title="143"><span class="st">exemple d&#39;</span>application <span class="dv">87</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-144" title="144">exemple d<span class="st">&#39;application 88  0.185637051 8.143629e-01    0</span></a>
+<a class="sourceLine" id="cb1-145" title="145"><span class="st">exemple d&#39;</span>application <span class="dv">89</span>  <span class="fl">0.823111071</span> <span class="fl">1.768889e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-146" title="146">exemple d<span class="st">&#39;application 90  0.922534374 7.746563e-02    0</span></a>
+<a class="sourceLine" id="cb1-147" title="147"><span class="st">exemple d&#39;</span>application <span class="dv">91</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-148" title="148">exemple d<span class="st">&#39;application 92  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-149" title="149"><span class="st">exemple d&#39;</span>application <span class="dv">93</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-150" title="150">exemple d<span class="st">&#39;application 94  0.144502111 8.554979e-01    0</span></a>
+<a class="sourceLine" id="cb1-151" title="151"><span class="st">exemple d&#39;</span>application <span class="dv">95</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-152" title="152">exemple d<span class="st">&#39;application 96  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-153" title="153"><span class="st">exemple d&#39;</span>application <span class="dv">97</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-154" title="154">exemple d<span class="st">&#39;application 98  0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-155" title="155"><span class="st">exemple d&#39;</span>application <span class="dv">99</span>  <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-156" title="156">exemple d<span class="st">&#39;application 100 0.077616285 9.223837e-01    0</span></a>
+<a class="sourceLine" id="cb1-157" title="157"><span class="st">exemple d&#39;</span>application <span class="dv">101</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-158" title="158">exemple d<span class="st">&#39;application 102 0.851627854 1.483721e-01    0</span></a>
+<a class="sourceLine" id="cb1-159" title="159"><span class="st">exemple d&#39;</span>application <span class="dv">103</span> <span class="fl">0.749271047</span> <span class="fl">2.507290e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-160" title="160">exemple d<span class="st">&#39;application 104 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-161" title="161"><span class="st">exemple d&#39;</span>application <span class="dv">105</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-162" title="162">exemple d<span class="st">&#39;application 106 0.199239486 8.007605e-01    0</span></a>
+<a class="sourceLine" id="cb1-163" title="163"><span class="st">exemple d&#39;</span>application <span class="dv">107</span> <span class="fl">0.280383922</span> <span class="fl">7.196161e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-164" title="164">exemple d<span class="st">&#39;application 108 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-165" title="165"><span class="st">exemple d&#39;</span>application <span class="dv">109</span> <span class="fl">0.055338646</span> <span class="fl">9.446614e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-166" title="166">exemple d<span class="st">&#39;application 110 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-167" title="167"><span class="st">exemple d&#39;</span>application <span class="dv">111</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-168" title="168">exemple d<span class="st">&#39;application 112 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-169" title="169"><span class="st">exemple d&#39;</span>application <span class="dv">113</span> <span class="fl">0.873435052</span> <span class="fl">1.265649e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-170" title="170">exemple d<span class="st">&#39;application 114 0.529570044 4.704300e-01    0</span></a>
+<a class="sourceLine" id="cb1-171" title="171"><span class="st">exemple d&#39;</span>application <span class="dv">115</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-172" title="172">exemple d<span class="st">&#39;application 116 0.281498510 7.185015e-01    0</span></a>
+<a class="sourceLine" id="cb1-173" title="173"><span class="st">exemple d&#39;</span>application <span class="dv">117</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-174" title="174">exemple d<span class="st">&#39;application 118 0.266914194 7.330858e-01    0</span></a>
+<a class="sourceLine" id="cb1-175" title="175"><span class="st">exemple d&#39;</span>application <span class="dv">119</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-176" title="176">exemple d<span class="st">&#39;application 120 0.343806872 6.561931e-01    0</span></a>
+<a class="sourceLine" id="cb1-177" title="177"><span class="st">exemple d&#39;</span>application <span class="dv">121</span> <span class="fl">0.510983762</span> <span class="fl">4.890162e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-178" title="178">exemple d<span class="st">&#39;application 122 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-179" title="179"><span class="st">exemple d&#39;</span>application <span class="dv">123</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-180" title="180">exemple d<span class="st">&#39;application 124 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-181" title="181"><span class="st">exemple d&#39;</span>application <span class="dv">125</span> <span class="fl">0.762954585</span> <span class="fl">2.370454e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-182" title="182">exemple d<span class="st">&#39;application 126 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-183" title="183"><span class="st">exemple d&#39;</span>application <span class="dv">127</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-184" title="184">exemple d<span class="st">&#39;application 128 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-185" title="185"><span class="st">exemple d&#39;</span>application <span class="dv">129</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-186" title="186">exemple d<span class="st">&#39;application 130 0.729157222 2.708428e-01    0</span></a>
+<a class="sourceLine" id="cb1-187" title="187"><span class="st">exemple d&#39;</span>application <span class="dv">131</span> <span class="fl">0.211031486</span> <span class="fl">7.889685e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-188" title="188">exemple d<span class="st">&#39;application 132 0.519656726 4.803433e-01    0</span></a>
+<a class="sourceLine" id="cb1-189" title="189"><span class="st">exemple d&#39;</span>application <span class="dv">133</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-190" title="190">exemple d<span class="st">&#39;application 134 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-191" title="191"><span class="st">exemple d&#39;</span>application <span class="dv">135</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-192" title="192">exemple d<span class="st">&#39;application 136 0.203511950 7.964881e-01    0</span></a>
+<a class="sourceLine" id="cb1-193" title="193"><span class="st">exemple d&#39;</span>application <span class="dv">137</span> <span class="fl">0.916048710</span> <span class="fl">8.395129e-02</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-194" title="194">exemple d<span class="st">&#39;application 138 0.931185209 6.881479e-02    0</span></a>
+<a class="sourceLine" id="cb1-195" title="195"><span class="st">exemple d&#39;</span>application <span class="dv">139</span> <span class="fl">0.173842808</span> <span class="fl">8.261572e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-196" title="196">exemple d<span class="st">&#39;application 140 0.845614939 1.543851e-01    0</span></a>
+<a class="sourceLine" id="cb1-197" title="197"><span class="st">exemple d&#39;</span>application <span class="dv">141</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-198" title="198">exemple d<span class="st">&#39;application 142 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-199" title="199"><span class="st">exemple d&#39;</span>application <span class="dv">143</span> <span class="fl">0.850062591</span> <span class="fl">1.499374e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-200" title="200">exemple d<span class="st">&#39;application 144 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-201" title="201"><span class="st">exemple d&#39;</span>application <span class="dv">145</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-202" title="202">exemple d<span class="st">&#39;application 146 0.826486858 1.735131e-01    0</span></a>
+<a class="sourceLine" id="cb1-203" title="203"><span class="st">exemple d&#39;</span>application <span class="dv">147</span> <span class="fl">0.893660089</span> <span class="fl">1.063399e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-204" title="204">exemple d<span class="st">&#39;application 148 0.014006117 9.859939e-01    0</span></a>
+<a class="sourceLine" id="cb1-205" title="205"><span class="st">exemple d&#39;</span>application <span class="dv">149</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-206" title="206">exemple d<span class="st">&#39;application 150 0.926245756 7.375424e-02    0</span></a>
+<a class="sourceLine" id="cb1-207" title="207"><span class="st">exemple d&#39;</span>application <span class="dv">151</span> <span class="fl">0.123912437</span> <span class="fl">8.760876e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-208" title="208">exemple d<span class="st">&#39;application 152 0.329195790 6.708042e-01    0</span></a>
+<a class="sourceLine" id="cb1-209" title="209"><span class="st">exemple d&#39;</span>application <span class="dv">153</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-210" title="210">exemple d<span class="st">&#39;application 154 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-211" title="211"><span class="st">exemple d&#39;</span>application <span class="dv">155</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-212" title="212">exemple d<span class="st">&#39;application 156 0.496775471 5.032245e-01    0</span></a>
+<a class="sourceLine" id="cb1-213" title="213"><span class="st">exemple d&#39;</span>application <span class="dv">157</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-214" title="214">exemple d<span class="st">&#39;application 158 0.432247275 5.677527e-01    0</span></a>
+<a class="sourceLine" id="cb1-215" title="215"><span class="st">exemple d&#39;</span>application <span class="dv">159</span> <span class="fl">0.026540104</span> <span class="fl">9.734599e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-216" title="216">exemple d<span class="st">&#39;application 160 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-217" title="217"><span class="st">exemple d&#39;</span>application <span class="dv">161</span> <span class="fl">0.382619285</span> <span class="fl">6.173807e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-218" title="218">exemple d<span class="st">&#39;application 162 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-219" title="219"><span class="st">exemple d&#39;</span>application <span class="dv">163</span> <span class="fl">0.092816982</span> <span class="fl">9.071830e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-220" title="220">exemple d<span class="st">&#39;application 164 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-221" title="221"><span class="st">exemple d&#39;</span>application <span class="dv">165</span> <span class="fl">0.866013825</span> <span class="fl">1.339862e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-222" title="222">exemple d<span class="st">&#39;application 166 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-223" title="223"><span class="st">exemple d&#39;</span>application <span class="dv">167</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-224" title="224">exemple d<span class="st">&#39;application 168 0.868610582 1.313894e-01    0</span></a>
+<a class="sourceLine" id="cb1-225" title="225"><span class="st">exemple d&#39;</span>application <span class="dv">169</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-226" title="226">exemple d<span class="st">&#39;application 170 0.675641846 3.243582e-01    0</span></a>
+<a class="sourceLine" id="cb1-227" title="227"><span class="st">exemple d&#39;</span>application <span class="dv">171</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-228" title="228">exemple d<span class="st">&#39;application 172 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-229" title="229"><span class="st">exemple d&#39;</span>application <span class="dv">173</span> <span class="fl">0.499868615</span> <span class="fl">5.001314e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-230" title="230">exemple d<span class="st">&#39;application 174 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-231" title="231"><span class="st">exemple d&#39;</span>application <span class="dv">175</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-232" title="232">exemple d<span class="st">&#39;application 176 0.237374948 7.626251e-01    0</span></a>
+<a class="sourceLine" id="cb1-233" title="233"><span class="st">exemple d&#39;</span>application <span class="dv">177</span> <span class="fl">0.951073066</span> <span class="fl">4.892693e-02</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-234" title="234">exemple d<span class="st">&#39;application 178 0.639745833 3.602542e-01    0</span></a>
+<a class="sourceLine" id="cb1-235" title="235"><span class="st">exemple d&#39;</span>application <span class="dv">179</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-236" title="236">exemple d<span class="st">&#39;application 180 0.253903409 7.460966e-01    0</span></a>
+<a class="sourceLine" id="cb1-237" title="237"><span class="st">exemple d&#39;</span>application <span class="dv">181</span> <span class="fl">0.060010586</span> <span class="fl">9.399894e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-238" title="238">exemple d<span class="st">&#39;application 182 0.335489748 6.645103e-01    0</span></a>
+<a class="sourceLine" id="cb1-239" title="239"><span class="st">exemple d&#39;</span>application <span class="dv">183</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-240" title="240">exemple d<span class="st">&#39;application 184 0.091838232 9.081618e-01    0</span></a>
+<a class="sourceLine" id="cb1-241" title="241"><span class="st">exemple d&#39;</span>application <span class="dv">185</span> <span class="fl">0.762073944</span> <span class="fl">2.379261e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-242" title="242">exemple d<span class="st">&#39;application 186 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-243" title="243"><span class="st">exemple d&#39;</span>application <span class="dv">187</span> <span class="fl">0.000000000</span> <span class="fl">0.000000e+00</span>    <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-244" title="244">exemple d<span class="st">&#39;application 188 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-245" title="245"><span class="st">exemple d&#39;</span>application <span class="dv">189</span> <span class="fl">0.883811208</span> <span class="fl">1.161888e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-246" title="246">exemple d<span class="st">&#39;application 190 0.732390620 2.676094e-01    0</span></a>
+<a class="sourceLine" id="cb1-247" title="247"><span class="st">exemple d&#39;</span>application <span class="dv">191</span> <span class="fl">0.793079401</span> <span class="fl">2.069206e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-248" title="248">exemple d<span class="st">&#39;application 192 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-249" title="249"><span class="st">exemple d&#39;</span>application <span class="dv">193</span> <span class="fl">0.251762652</span> <span class="fl">7.482373e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-250" title="250">exemple d<span class="st">&#39;application 194 0.309957987 6.900420e-01    0</span></a>
+<a class="sourceLine" id="cb1-251" title="251"><span class="st">exemple d&#39;</span>application <span class="dv">195</span> <span class="fl">0.839834063</span> <span class="fl">1.601659e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-252" title="252">exemple d<span class="st">&#39;application 196 0.195430409 8.045696e-01    0</span></a>
+<a class="sourceLine" id="cb1-253" title="253"><span class="st">exemple d&#39;</span>application <span class="dv">197</span> <span class="fl">0.818471280</span> <span class="fl">1.815287e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-254" title="254">exemple d<span class="st">&#39;application 198 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-255" title="255"><span class="st">exemple d&#39;</span>application <span class="dv">199</span> <span class="fl">0.170140048</span> <span class="fl">8.298600e-01</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-256" title="256">exemple d<span class="st">&#39;application 200 0.000000000 0.000000e+00    1</span></a>
+<a class="sourceLine" id="cb1-257" title="257"><span class="st">exemple d&#39;</span>application </a>
+<a class="sourceLine" id="cb1-258" title="258">exemple d<span class="st">&#39;application $ICL</span></a>
+<a class="sourceLine" id="cb1-259" title="259"><span class="st">exemple d&#39;</span>application [<span class="dv">1</span>] <span class="fl">2043.304</span></a>
+<a class="sourceLine" id="cb1-260" title="260">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-261" title="261"><span class="st">exemple d&#39;</span>application <span class="op">$</span>BIC</a>
+<a class="sourceLine" id="cb1-262" title="262">exemple d<span class="st">&#39;application [1] 1998.058</span></a>
+<a class="sourceLine" id="cb1-263" title="263"><span class="st">exemple d&#39;</span>application </a>
+<a class="sourceLine" id="cb1-264" title="264">exemple d<span class="st">&#39;application $mu</span></a>
+<a class="sourceLine" id="cb1-265" title="265"><span class="st">exemple d&#39;</span>application             V4        V5</a>
+<a class="sourceLine" id="cb1-266" title="266">exemple d<span class="st">&#39;application [1,] -2.682884 -6.682259</span></a>
+<a class="sourceLine" id="cb1-267" title="267"><span class="st">exemple d&#39;</span>application [<span class="dv">2</span>,] <span class="fl">-2.605928</span> <span class="fl">-6.502827</span></a>
+<a class="sourceLine" id="cb1-268" title="268">exemple d<span class="st">&#39;application [3,] -1.333469  1.225948</span></a>
+<a class="sourceLine" id="cb1-269" title="269"><span class="st">exemple d&#39;</span>application </a>
+<a class="sourceLine" id="cb1-270" title="270">exemple d<span class="st">&#39;application $cov_list</span></a>
+<a class="sourceLine" id="cb1-271" title="271"><span class="st">exemple d&#39;</span>application <span class="op">$</span>cov_list[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb1-272" title="272">exemple d<span class="st">&#39;application             V4          V5</span></a>
+<a class="sourceLine" id="cb1-273" title="273"><span class="st">exemple d&#39;</span>application V4 <span class="fl">0.982795560</span> <span class="fl">0.001137817</span></a>
+<a class="sourceLine" id="cb1-274" title="274">exemple d<span class="st">&#39;application V5 0.001137817 0.066875990</span></a>
+<a class="sourceLine" id="cb1-275" title="275"><span class="st">exemple d&#39;</span>application </a>
+<a class="sourceLine" id="cb1-276" title="276">exemple d<span class="st">&#39;application $cov_list[[2]]</span></a>
+<a class="sourceLine" id="cb1-277" title="277"><span class="st">exemple d&#39;</span>application             V4          V5</a>
+<a class="sourceLine" id="cb1-278" title="278">exemple d<span class="st">&#39;application V4  0.71468984 -0.01159087</span></a>
+<a class="sourceLine" id="cb1-279" title="279"><span class="st">exemple d&#39;</span>application V5 <span class="fl">-0.01159087</span>  <span class="fl">0.16760892</span></a>
+<a class="sourceLine" id="cb1-280" title="280">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-281" title="281"><span class="st">exemple d&#39;</span>application <span class="op">$</span>cov_list[[<span class="dv">3</span>]]</a>
+<a class="sourceLine" id="cb1-282" title="282">exemple d<span class="st">&#39;application            V4         V5</span></a>
+<a class="sourceLine" id="cb1-283" title="283"><span class="st">exemple d&#39;</span>application V4  <span class="fl">3.3280339</span> <span class="fl">-0.1654837</span></a>
+<a class="sourceLine" id="cb1-284" title="284">exemple d<span class="st">&#39;application V5 -0.1654837  0.6060500</span></a>
+<a class="sourceLine" id="cb1-285" title="285"><span class="st">exemple d&#39;</span>application </a>
+<a class="sourceLine" id="cb1-286" title="286">exemple d<span class="st">&#39;application </span></a>
+<a class="sourceLine" id="cb1-287" title="287"><span class="st">exemple d&#39;</span>application <span class="op">$</span>cluster</a>
+<a class="sourceLine" id="cb1-288" title="288">exemple d<span class="st">&#39;application   [1] 3 2 1 3 2 3 3 3 3 2 3 1 3 3 2 3 3 1 3 3 3 3 2 3 3 3 1 1 1 3 3 3 1 2 1</span></a>
+<a class="sourceLine" id="cb1-289" title="289"><span class="st">exemple d&#39;</span>application  [<span class="dv">36</span>] <span class="dv">1</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb1-290" title="290">exemple d<span class="st">&#39;application  [71] 2 1 2 3 3 1 1 2 3 3 3 2 3 1 1 1 3 2 1 1 3 3 3 2 3 3 3 3 3 2 3 1 1 3 3</span></a>
+<a class="sourceLine" id="cb1-291" title="291"><span class="st">exemple d&#39;</span>application [<span class="dv">106</span>] <span class="dv">2</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-292" title="292">exemple d<span class="st">&#39;application [141] 3 3 1 3 3 1 1 2 3 1 2 2 3 3 3 2 3 2 2 3 2 3 2 3 1 3 3 1 3 1 3 3 2 3 3</span></a>
+<a class="sourceLine" id="cb1-293" title="293"><span class="st">exemple d&#39;</span>application [<span class="dv">176</span>] <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">ModeleMix<span class="op">::</span><span class="kw">plot_cluster</span>(heterodata,fit<span class="op">$</span>cluster)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">ModeleMix<span class="op">::</span><span class="kw">plot_BIC</span>(heterodata,<span class="dv">4</span>)</a></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAYFBMVEUAAAAAACsAAFUAAP8AKysAK4AAVaoAzQArAAArACsrAFUrKwArgNRVAABVACtVgIBVqqpVqv+AKwCAVQCAgFWA1P+qVQCq///UgCvU////AAD/qlX/1ID//6r//9T///847pYSAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAHTUlEQVR4nO2dC3uiOBhG7Xba2t26M7pTlile/v+/XHJDmBXfcA0t5zyPViGJchqSD/3AzQXuskn9BpYOggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCDByII2n4ZUgrylcVudgJSCwm3RJBS0maLd0UGQAEECxiABs5ggqaDPAIIECBIgSIAgAYIEMwvqfpCcGnqQAEECBAkQJECQAEECBAkmEnQ+uGjnj39HaS4h0wjKN2/uQREeDGouJZMIOh8qLfnTr8HNJWUSQafdPjwsWnaydQuiBynyje9CjEEtnHZuFmvpPwiau7npQJCAQFFAoChgmhcQKAroQQICRQGBooA4SMAXh4JJBR23+7ZV6xYURqA7sfS6BYXJix7Uymln5q9VCjofni9m01vim4rs4X2VglzXuP5tpzxgXaOgLHg57VQfOm6/rU9QxFHWlfNhszpBEcfpI79uajoLuvage4LyMgLa3yv1VQVdsuewILuzi+XlFHbamaKrE1RNTHdmKD9SnQ+lwtUJCkFy3vZBjyGMVGUnW58g/4XF872y1VyXPa9QUAxBS3nUiqCbhM9czwcETfy6qekcB8lPekZ+3dTQgwQIEnQWlJt9KwtHEtO/bmq6CjITeGa+7roXSY/5uqnp83GH+zhRf9wxyuumps/HHe6Qno87bhUcKujLf3FIDxIFESQKIkgU5FBjeMEkzU0HggQIEpBILiCRXEAasIBEcgE9SEAiuYBEcgFxUBuPj4/mD4JaePQ3AsXbPIZ7AsXbTCvoC0zz0wr6CoHipGPQF+hBE89iBIqKhQWKLy8vfauuIg568bc+zCwoyReHL7X7zqwhUFygoGUFissTtLRpfnFj0OICxaXNYkvrQUMgUBSsI1AcwCoCxSEgSDCRoPWecRjHis84jGLVZxzGsO4zDiPgjEPFlGccfnx89K7bg8lmsanOOPzwt7n4bHHQR+1+FhAkQJDgswliDJJ8jVls7uamI5mgT0MiQbLR9lXp14xRfHCj6TUgqPeaMYoPbjS9BgT1XjNG8cGNpteAoN5rxig+uNH0GhDUe80YxdcHggQIEiBIgCABggQIEiBIgCABggQIEiBIgCDBuIKOf1ZJH8Vm8/Cua9jTY6qk68hKeb1YZJ1L/fcM4uuMK+i0q7JiivINFPpNnA9lmTxcKT6ykklTqopF1jElq/Tu+DrjCiqu50m5ZLTs7iXyDe7SsT4xK7KSvVqf+7Gm+BeyWV9eUHydy6iCis1bdY5LY8N1Tfff7FIpCIqvkz/94wV1enPjjkFXQa/vl/hrMmauXJdKud9DouuUBcMY1OnNTSTI9YnI/TycGhNfqagG9tg6ZrcKgjq9uQUIKupjdGwlm63doY45f2tJgjr04uupVZ26fhi34urYYkvaxTqMndcoqNPg6S+dHlkn90kvXeo4JhIUPZPmtYvoR1Zy21d0Cg0sWeJp/lLvtpGxWPNXJyMrmQ2tsv47BH1Z6kDRC3IhSh4Vzfuu//DepdLF/3pDpzqXILZbHQ5WFQgSIEiAIAGCBAgSIEiAIAGCBAgSIEiAIAGCBAgSIEiAIAGCBAgSIEiAIAGCBAgSIEiAIAGCBAgSIEgwtaBwObis7QLCPo2lnbYsg9rlv69lRVs9mF6Qyx+bRdAtZ0OZXtA3m8+FoBbOh+fcdCErqHBZ9cftj1354Lg1SSzH7fetXXr6+6dJs87rmfcmTeWnEfT70rJbljb8j5ybRkxCjLk315nd1NpzawZswAyC7GYYQUX5Ts3FhI9bm15vbJgtKJ+YPKrTzjjM/TOLSQ8uTCZPY6m7JvFbTZDthWXr9nleby+s6b8BMwgKGaYuKazcY+ym+ru92+7SlE2gb/zmvdv7sof3xlL35FLvQSGxzTyvytoHsZna7cwhyOcou+21TvZ+68MTo81urRtw/Ljktq5c1FgaBq2aoHCOiHlelfUrhxqaQ5DZ0kpQ2CMqQXYML++doHo2al4JauSovrpBuz4G2XOG9k5QKOtGbL+mP7MIumRvnXqQ57ce5LnRg+zzzDVRlb1OaVlsPuIt5hF0fP2rMQY1BNkx6OlXY2stPp/Zuws0xqC3/wmryl4rDZr95xF0yTaNWawhyOTkbsKW2ZNUwr88t6v8LNZY6iZHcz5CuQ/tba8p/GAeyl57ZGzG701mEuTm8CoOagj6buOh8H82UUw1sDbioPpSFwfZH0L54Qce6yXEQWVZ115Y0xsOVgUIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCABggQIEiBIgCDBf2TRcbrMUQjOAAAAAElFTkSuQmCC" /><!-- --></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2">fit &lt;-<span class="st"> </span>ModeleMix<span class="op">::</span><span class="kw">modelMixte</span>(iris,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3">ModeleMix<span class="op">::</span><span class="kw">plot_cluster</span>(iris,fit<span class="op">$</span>cluster)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

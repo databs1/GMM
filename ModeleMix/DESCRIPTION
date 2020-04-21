@@ -1,0 +1,16 @@
+Package: ModeleMix
+Type: Package
+Title: Modele Mixte Multinomiale et Gaussienne
+Version: 1.1.0
+Author: Christopher Houbeiche Florian Joly
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: mmmpdf pour le calcule de la densite multinomiale plotBIC representation du nombre de cluster K optimaleplotcluster representation graphique des clusters prend les resultats de la fonction data_quanitatif.
+License: GPL-3
+Imports: NPflow, Rmixmod, matrixStats
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.1
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2019-12-01 22:15:15 UTC; User
