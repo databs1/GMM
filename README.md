@@ -5,6 +5,7 @@ The clustering function takes as input:
 - the data set
 - the number of clusters
 - the number of initializations of the EM algorithm (by specifying a default value)
+
 The algorithm returns:
 - the posterior probabilities for each individual belonging to each online cluster
 - the partitions estimated by maximum a posteriori
