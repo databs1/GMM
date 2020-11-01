@@ -11,3 +11,9 @@ The algorithm returns:
 - the partitions estimated by maximum a posteriori
 - the proportions, means and variance of each cluster
 - the values of the BIC and ICL criteria
+
+devtools::install_github("databs1/GMM") #to install the package
+library(ModeleMix) #load library
+modelMixte(data,k) #data needs to contain quantitative and qualitative data or only qualitative data only,
+                   #it doesn't run if only quantitative data is supplied. Use Kmeans instead for clustering with quantitative data. 
+vignette("Mixmod") #To see examples 
