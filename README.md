@@ -12,8 +12,8 @@ The algorithm returns:
 - the proportions, means and variance of each cluster
 - the values of the BIC and ICL criteria
 
-devtools::install_github("databs1/GMM") #to install the package
-library(ModeleMix)  \t#load library
-modelMixte(data,k)  \t#data needs to contain quantitative and qualitative data or only qualitative data only,\n
-                    \t#it doesn't run if only quantitative data is supplied. Use Kmeans instead for clustering with quantitative data. 
-vignette("Mixmod")  \t#To see examples 
+devtools::install_github("databs1/GMM") #to install the package<br/>
+library(ModeleMix)  &nbsp;&nbsp;#load library<br/>
+modelMixte(data,k)  &nbsp;&nbsp;#data needs to contain quantitative and qualitative data or only qualitative data only,<br/>
+                    &nbsp;&nbsp;#it doesn't run if only quantitative data is supplied. Use Kmeans instead for clustering with quantitative data. 
+vignette("Mixmod") &nbsp;&nbsp;#To see examples 
