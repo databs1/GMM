@@ -10,9 +10,9 @@ The algorithm returns:
 - the posterior probabilities for each individual belonging to each online cluster
 - the partitions estimated by maximum a posteriori
 - the proportions, means and variance of each cluster
-- the values of the BIC and ICL criteria
-
+- the values of the BIC and ICL criteria<br/>
+Data needs to contain quantitative and qualitative data or only qualitative data only,it doesn't run if only quantitative data is supplied. Use Kmeans instead for clustering with quantitative data. <br/>
 devtools::install_github("databs1/GMM") #to install the package<br/>
 library(ModeleMix)  &nbsp;&nbsp;#load library<br/>
-modelMixte(data,k)  &nbsp;&nbsp;#data needs to contain quantitative and qualitative data or only qualitative data only,it doesn't run if only quantitative data is supplied. Use Kmeans instead for clustering with quantitative data. <br/><br/>
+modelMixte(data,k) <br/>
 vignette("Mixmod") &nbsp;&nbsp;#To see examples 
