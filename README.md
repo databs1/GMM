@@ -15,5 +15,5 @@ The algorithm returns:
 devtools::install_github("databs1/GMM") #to install the package<br/>
 library(ModeleMix)  &nbsp;&nbsp;#load library<br/>
 modelMixte(data,k)  &nbsp;&nbsp;#data needs to contain quantitative and qualitative data or only qualitative data only,<br/>
-                    &nbsp;&nbsp;#it doesn't run if only quantitative data is supplied. Use Kmeans instead for clustering with quantitative data. 
+                    &nbsp;&nbsp;#it doesn't run if only quantitative data is supplied. Use Kmeans instead for clustering with quantitative data. <br/>
 vignette("Mixmod") &nbsp;&nbsp;#To see examples 
